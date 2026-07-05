@@ -2,15 +2,19 @@
 
 #include <stdint.h>
 
-/* RCC — включает/выключает тактирование периферии (RM0383 §6.3) */
-#define RCC_AHB1ENR  (*(volatile uint32_t *)0x40023830U)  /* тактирование портов GPIO */
-#define RCC_AHB1ENR_GPIOAEN  (1U << 0)  /* бит 0: включить порт A   */
-#define RCC_AHB1ENR_GPIOCEN  (1U << 2)  /* бит 2: включить порт C   */
+#define f_APB1  16000000U
+#define BAUD      115200U
 
-/* GPIOA, база 0x40020000 (RM0383 §8.4) */
-#define GPIOA_MODER  (*(volatile uint32_t *)0x40020000U)  /* режим вывода: вход/выход/... */
-#define GPIOA_ODR    (*(volatile uint32_t *)0x40020014U)  /* состояние выходов порта      */
+#define RCC_AHB1ENR  (*(volatile uint32_t *)0x40023830U)
+#define RCC_AHB1ENR_GPIOAEN  (1U << 0)
 
-/* GPIOC, база 0x40020800 (RM0383 §8.4) */
-#define GPIOC_MODER (*(volatile uint32_t *)0x40020800U) /* режим вывода: вход/выход/... */
-#define GPIOC_IDR  (*(volatile uint32_t *)0x40020810U)  /* Input Data Register */
+#define RCC_APB1ENR (*(volatile uint32_t *)0x40023840U)
+#define RCC_APB1ENR_USART2EN  (1U << 17)
+
+#define GPIOA_MODER  (*(volatile uint32_t *)0x40020000U)
+#define GPIOA_AFRL  (*(volatile uint32_t *)0x40020020U)
+
+#define USART2_SR (*(volatile uint32_t *)0x40004400U)
+#define USART2_DR (*(volatile uint32_t *)0x40004404U)
+#define USART2_BRR (*(volatile uint32_t *)0x40004408U)
+#define USART2_CR1 (*(volatile uint32_t *)0x4000440CU)

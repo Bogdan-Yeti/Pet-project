@@ -29,7 +29,7 @@ int main(void)
     USART2_CR1 |= (1U << 13);
 
     while (1) {
-        char *str = "Hello world\n\0";
+        char *str = "Hello world\r\n\0";
         while (*str) { 
             write_byte(*str); 
             str++; 

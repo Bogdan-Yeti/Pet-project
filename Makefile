@@ -6,13 +6,16 @@ MCU = -mcpu=cortex-m4 -mthumb -mfloat-abi=soft
 CFLAGS  = $(MCU) -Wall -g -O2 -ffreestanding
 LDFLAGS = $(MCU) -T linker.ld -nostdlib
 
-SRCS   = main.c startup.c
-OBJS   = $(SRCS:.c=.o)
+SRCS   = main.c startup.s
+OBJS   = main.o startup.o
 TARGET = firmware
 
 all: $(TARGET).bin
 
 %.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+%.o: %.s
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(TARGET).elf: $(OBJS)

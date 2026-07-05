@@ -7,12 +7,16 @@
 
 #define RCC_AHB1ENR  (*(volatile uint32_t *)0x40023830U)
 #define RCC_AHB1ENR_GPIOAEN  (1U << 0)
+#define RCC_AHB1ENR_GPIOCEN  (1U << 2)
 
 #define RCC_APB1ENR (*(volatile uint32_t *)0x40023840U)
 #define RCC_APB1ENR_USART2EN  (1U << 17)
 
 #define GPIOA_MODER  (*(volatile uint32_t *)0x40020000U)
 #define GPIOA_AFRL  (*(volatile uint32_t *)0x40020020U)
+
+#define GPIOC_MODER  (*(volatile uint32_t *)0x40020800U)
+#define GPIOC_IDR  (*(volatile uint32_t *)0x40020810U)
 
 #define USART2_SR (*(volatile uint32_t *)0x40004400U)
 #define USART2_DR (*(volatile uint32_t *)0x40004404U)

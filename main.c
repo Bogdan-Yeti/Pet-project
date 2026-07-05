@@ -9,6 +9,8 @@ void write_byte(uint8_t b) {
 int main(void)
 {
     RCC_AHB1ENR |= RCC_AHB1ENR_GPIOAEN;
+    RCC_AHB1ENR |= RCC_AHB1ENR_GPIOCEN;
+
     RCC_APB1ENR |= RCC_APB1ENR_USART2EN;
 
     GPIOA_MODER &= ~(3U << 4);
@@ -16,6 +18,8 @@ int main(void)
 
     GPIOA_MODER |= (1U << 5);
     GPIOA_MODER |= (1U << 7);
+
+    GPIOC_MODER &= ~(3U << 26);
 
     GPIOA_AFRL &= ~(15U << 8);
     GPIOA_AFRL &= ~(15U << 12);
@@ -28,12 +32,17 @@ int main(void)
     USART2_CR1 |= (1U << 3);
     USART2_CR1 |= (1U << 13);
 
+    uint8_t flag = 1;
     while (1) {
-        char *str = "Hello world\r\n\0";
-        while (*str) { 
-            write_byte(*str); 
-            str++; 
+        if (!(GPIOC_IDR & (1U << 13)) && flag) {
+            char *str = "Hello world\r\n\0";
+            while (*str) { 
+                write_byte(*str); 
+                str++; 
+            }
+            flag = 0;
+        } else if (GPIOC_IDR & (1U << 13)) {
+            flag = 1;
         }
-        for (int i = 0; i < 2000000; i++) { }
     }
 }

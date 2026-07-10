@@ -33,6 +33,13 @@ Reset_Handler:
     cmp     r2, r3
     blo     .Lzero_body
 
+    ldr     r0, =0xE000ED88     /* адрес SCB_CPACR */
+    ldr     r1, [r0]
+    orr     r1, r1, #(0xF << 20)
+    str     r1, [r0]
+    dsb
+    isb
+
     bl      main
 
 .Ltrap:
@@ -61,32 +68,3 @@ vector_table:
     .word   0
     .word   Default_Handler
     .word   Default_Handler
-    .word   Default_Handler
-    .word   Default_Handler
-    .word   Default_Handler
-    .word   Default_Handler
-    .word   Default_Handler
-    .word   Default_Handler
-    .word   Default_Handler
-    .word   Default_Handler
-    .word   Default_Handler
-    .word   Default_Handler
-    .word   Default_Handler
-    .word   Default_Handler
-    .word   Default_Handler
-    .word   Default_Handler
-    .word   Default_Handler
-    .word   Default_Handler
-    .word   Default_Handler
-    .word   Default_Handler
-    .word   Default_Handler
-    .word   Default_Handler
-    .word   Default_Handler
-    .word   Default_Handler
-    .word   Default_Handler
-    .word   Default_Handler
-    .word   Default_Handler
-    .word   Default_Handler
-    .word   Default_Handler
-    .word   Default_Handler
-    .word   TIM2_IRQHandler

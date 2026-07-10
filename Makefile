@@ -1,7 +1,7 @@
 CC      = arm-none-eabi-gcc
 OBJCOPY = arm-none-eabi-objcopy
 
-MCU = -mcpu=cortex-m4 -mthumb -mfloat-abi=soft
+MCU = -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16
 
 CFLAGS  = $(MCU) -Wall -g -O2 -ffreestanding
 LDFLAGS = $(MCU) -T linker.ld -nostdlib

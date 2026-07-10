@@ -16,6 +16,7 @@
 #define GPIOA_MODER  (*(volatile uint32_t *)0x40020000U)
 #define GPIOA_ODR  (*(volatile uint32_t *)0x40020014U)
 #define GPIOA_AFRL  (*(volatile uint32_t *)0x40020020U)
+#define GPIOA_IDR    (*(volatile uint32_t *)0x40020010U)
 
 #define GPIOC_MODER  (*(volatile uint32_t *)0x40020800U)
 #define GPIOC_IDR  (*(volatile uint32_t *)0x40020810U)
